@@ -30,15 +30,22 @@
             var telefone = document.getElementById("telefone").value;
 
             // Envia os dados para o Google Apps Script
-            var url = "https://script.google.com/macros/s/AKfycbzGoltL6713UpejbCZXt610D8u3w2WjRBVjtKteoF91eenudO031R6katTsiyVDglZbrw/exec";
+            var url = "https://script.google.com/macros/s/AKfycbzGoltL6713UpejbCZXt610D8u3w2WjRBVjtKteoF91eenudO031R6katTsiyVDglZbrw/exec"; // Substitua pelo URL do seu Web App
             var params = {
-                "nome": nome,
                 "data": data,
-                "telefone": telefone
+                "nome": nome,
+                "telefone": telefone,
+                "avisado": "não", // Defina valores padrão para avisado e debito
+                "debito": "não"
             };
 
-            fetch(url + "?" + new URLSearchParams(params), {
-                method: "GET"
+            // Enviar os dados via POST
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(params)
             })
             .then(response => response.json())
             .then(data => {
