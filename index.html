@@ -2,61 +2,21 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Cadastro</title>
+    <title>Adicionar Dados no Google Sheets</title>
 </head>
 <body>
-    <h2>Cadastro de Cliente</h2>
-    <form id="formCliente">
+    <h1>Formulário de Cadastro</h1>
+    <form id="formCadastro">
         <label for="nome">Nome:</label><br>
         <input type="text" id="nome" name="nome" required><br><br>
         
-        <label for="data">Data:</label><br>
-        <input type="date" id="data" name="data" required><br><br>
+        <label for="numero">Número:</label><br>
+        <input type="text" id="numero" name="numero" required><br><br>
         
-        <label for="telefone">Telefone:</label><br>
-        <input type="text" id="telefone" name="telefone" required><br><br>
+        <label for="vencimento">Data de Vencimento:</label><br>
+        <input type="date" id="vencimento" name="vencimento" required><br><br>
         
-        <input type="submit" value="Enviar">
+        <button type="submit">Adicionar</button>
     </form>
 
     <script>
-        document.getElementById("formCliente").addEventListener("submit", function(event){
-            event.preventDefault(); // Previne o envio padrão do formulário
-
-            // Obtém os valores do formulário
-            var nome = document.getElementById("nome").value;
-            var data = document.getElementById("data").value;
-            var telefone = document.getElementById("telefone").value;
-
-            // Envia os dados para o Google Apps Script
-            var url = "https://script.google.com/macros/s/AKfycbzGoltL6713UpejbCZXt610D8u3w2WjRBVjtKteoF91eenudO031R6katTsiyVDglZbrw/exec"; // Substitua pelo URL do seu Web App
-            var params = {
-                "data": data,
-                "nome": nome,
-                "telefone": telefone,
-                "avisado": "não", // Defina valores padrão para avisado e debito
-                "debito": "não"
-            };
-
-            // Enviar os dados via POST
-            fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(params)
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert("Dados enviados com sucesso!");
-                document.getElementById("formCliente").reset(); // Limpa o formulário
-            })
-            .catch(error => {
-                alert("Erro ao enviar os dados. Tente novamente.");
-                console.error(error);
-            });
-        });
-    </script>
-</body>
-</html>
